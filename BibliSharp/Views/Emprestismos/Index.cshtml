@@ -1,0 +1,61 @@
+﻿@model IEnumerable<BibliSharp.DbModels.Emprestismo>
+
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<h1>Inicio</h1>
+
+<p>
+    <a asp-action="Create">Criar Novo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DataRetirada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CriadoPor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataLimite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataEntrega)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlteradoPor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataRetirada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CriadoPor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataLimite)
+            </td>
+            <td>
+                @if(item.DataEntrega != DateTime.MinValue)
+                @Html.DisplayFor(modelItem => item.DataEntrega)
+            </td>
+            <td>
+                @if (item.DataEntrega != DateTime.MinValue)
+                    @Html.DisplayFor(modelItem => item.AlteradoPor)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) 
+                @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

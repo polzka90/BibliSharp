@@ -1,0 +1,77 @@
+﻿@model IEnumerable<BibliSharp.DbModels.Usuario>
+
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<h1>Inicio</h1>
+
+<p>
+    <a asp-action="Create">Criar Novo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeUsuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sobrenome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ativo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataCreacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CriadoPor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataAlteracao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlteradoPor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeUsuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sobrenome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ativo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataCreacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CriadoPor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataAlteracao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlteradoPor)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> 
+                @*<a asp-action="Delete" asp-route-id="@item.Id">Apagar</a>*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

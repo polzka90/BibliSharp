@@ -1,0 +1,53 @@
+﻿@model IEnumerable<BibliSharp.DbModels.Livro>
+
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<h1>Inicio</h1>
+
+<p>
+    <a asp-action="Create">Criar Novo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Editora)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Autora)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ano)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Editora)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Autora)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ano)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edita</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> 
+                @*<a asp-action="Delete" asp-route-id="@item.Id">Apagar</a>*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

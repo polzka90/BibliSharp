@@ -1,0 +1,48 @@
+﻿@model BibliSharp.DbModels.Emprestismo
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalhes</h1>
+
+<div>
+    <h4>Emprestismo</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DataRetirada)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DataRetirada)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CriadoPor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CriadoPor)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DataLimite)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DataLimite)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DataEntrega)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DataEntrega)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AlteradoPor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AlteradoPor)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Voltar a Lista</a>
+</div>
