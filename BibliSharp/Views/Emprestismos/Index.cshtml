@@ -8,24 +8,31 @@
 
 <p>
     <a asp-action="Create">Criar Novo</a>
+    <label> | </label>
+    <a asp-action="VerSemDevolucao"> Ver Livros que Faltam</a>
+    <label> | </label>
+    <a asp-action="Index"> Ver Todos</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.DataRetirada)
+                Id
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CriadoPor)
+                Data Retirada
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DataLimite)
+                Criado Por
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DataEntrega)
+                Data Limite
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AlteradoPor)
+                Data Entrega
+            </th>
+            <th>
+                Alterado Por
             </th>
             <th></th>
         </tr>
@@ -33,6 +40,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmprestismoId)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DataRetirada)
             </td>
@@ -43,16 +53,20 @@
                 @Html.DisplayFor(modelItem => item.DataLimite)
             </td>
             <td>
-                @if(item.DataEntrega != DateTime.MinValue)
-                @Html.DisplayFor(modelItem => item.DataEntrega)
+                @if (item.DataEntrega != DateTime.MinValue)
+                    @Html.DisplayFor(modelItem => item.DataEntrega)
             </td>
             <td>
                 @if (item.DataEntrega != DateTime.MinValue)
                     @Html.DisplayFor(modelItem => item.AlteradoPor)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) 
+                @if (item.DataEntrega == DateTime.MinValue)
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.EmprestismoId })
+                    <label> | </label>
+                    @Html.ActionLink("Details", "Details", new { id = item.EmprestismoId })
+                }
                 @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
             </td>
         </tr>

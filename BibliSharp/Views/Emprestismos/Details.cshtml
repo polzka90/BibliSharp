@@ -1,4 +1,4 @@
-﻿@model BibliSharp.DbModels.Emprestismo
+﻿@model BibliSharp.Models.DetailsEmprestismoViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -10,35 +10,49 @@
     <h4>Emprestismo</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataRetirada)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Aluno)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataRetirada)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Aluno)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CriadoPor)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Livro)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CriadoPor)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Livro)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataLimite)
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Emprestismo.DataRetirada)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataLimite)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Emprestismo.DataRetirada)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataEntrega)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Emprestismo.CriadoPor)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataEntrega)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Emprestismo.CriadoPor)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AlteradoPor)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Emprestismo.DataLimite)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AlteradoPor)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Emprestismo.DataLimite)
+        </dd>
+        <dt class="col-sm-2">
+            @if(Model.Emprestismo.DataEntrega > DateTime.MinValue)
+            @Html.DisplayNameFor(model => model.Emprestismo.DataEntrega)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Emprestismo.DataEntrega)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Emprestismo.AlteradoPor)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Emprestismo.AlteradoPor)
         </dd>
     </dl>
 </div>

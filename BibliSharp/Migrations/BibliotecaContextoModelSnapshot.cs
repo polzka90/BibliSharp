@@ -77,7 +77,11 @@ namespace BibliSharp.Migrations
                     b.Property<DateTime>("DataRetirada")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("AlunoId", "LivroId");
+                    b.Property<int>("EmprestismoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("EmprestismoId");
 
                     b.ToTable("Emprestismos");
                 });

@@ -32,6 +32,8 @@ namespace BibliSharp.Migrations
                 name: "Emprestismos",
                 columns: table => new
                 {
+                    EmprestismoId = table.Column<int>(type: "INTEGER", nullable: false)
+                                        .Annotation("Sqlite:Autoincrement", true),
                     AlunoId = table.Column<int>(type: "INTEGER", nullable: false),
                     LivroId = table.Column<int>(type: "INTEGER", nullable: false),
                     DataRetirada = table.Column<DateTime>(type: "TEXT", nullable: false),
@@ -42,7 +44,7 @@ namespace BibliSharp.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Emprestismos", x => new { x.AlunoId, x.LivroId });
+                    table.PrimaryKey("PK_Emprestismos", x => x.EmprestismoId);
                 });
 
             migrationBuilder.CreateTable(

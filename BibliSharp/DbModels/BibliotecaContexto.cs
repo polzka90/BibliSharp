@@ -18,7 +18,7 @@ namespace BibliSharp.DbModels
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Aluno>().HasKey(m => m.Id);
-            builder.Entity<Emprestismo>().HasKey(m => new { m.AlunoId, m.LivroId });
+            builder.Entity<Emprestismo>().HasKey(m => m.EmprestismoId);
             builder.Entity<Livro>().HasKey(m => m.Id);
             builder.Entity<Usuario>().HasKey(m => m.Id);
             base.OnModelCreating(builder);

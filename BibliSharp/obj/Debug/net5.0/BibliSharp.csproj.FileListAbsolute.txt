@@ -195,5 +195,8 @@ C:\Users\Lepa\source\repos\BibliSharp\BibliSharp\bin\Debug\net5.0\System.Web.Web
 C:\Users\Lepa\source\repos\BibliSharp\BibliSharp\bin\Debug\net5.0\System.Web.WebPages.dll
 C:\Users\Lepa\source\repos\BibliSharp\BibliSharp\bin\Debug\net5.0\Microsoft.Web.Infrastructure.dll
 C:\Users\Lepa\source\repos\BibliSharp\BibliSharp\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
-C:\Users\Lepa\source\repos\BibliSharp\BibliSharp\obj\Debug\net5.0\BibliSharp.csproj.AssemblyReference.cache
 C:\Users\Lepa\source\repos\BibliSharp\BibliSharp\obj\Debug\net5.0\Razor\Views\Home\AccessDenied.cshtml.g.cs
+C:\Users\Lepa\source\repos\BibliSharp\BibliSharp\obj\Debug\net5.0\Razor\Views\Emprestismos\VerSemDevolucao.cshtml.g.cs
+C:\Users\Lepa\source\repos\BibliSharp\BibliSharp\bin\Debug\net5.0\BibliSharp.db
+C:\Users\Lepa\source\repos\BibliSharp\BibliSharp\obj\Debug\net5.0\BibliSharp.csproj.AssemblyReference.cache
+C:\Users\Lepa\source\repos\BibliSharp\BibliSharp\bin\Debug\net5.0\wwwroot\Img\LeveLivro.jpg

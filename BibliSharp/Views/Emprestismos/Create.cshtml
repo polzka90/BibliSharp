@@ -6,7 +6,7 @@
 
 <h1>Criar</h1>
 
-<h4>Emprestismo</h4>
+<h4>Emprestimo</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -16,13 +16,13 @@
                 @*<label asp-for="AlunoId" class="control-label"></label>
         <input asp-for="AlunoId" class="form-control" />
         <span asp-validation-for="AlunoId" class="text-danger"></span>*@
-                <select asp-for="Aluno" asp-items="Model.Alunos"></select>
+                <select asp-for="Emprestismo.AlunoId" asp-items="Model.Alunos"></select>
             </div>
             <div class="form-group">
                 @*<label asp-for="LivroId" class="control-label"></label>
                 <input asp-for="LivroId" class="form-control" />
                 <span asp-validation-for="LivroId" class="text-danger"></span>*@
-                <select asp-for="Livro" asp-items="Model.Livros"></select>
+                <select asp-for="Emprestismo.LivroId" asp-items="Model.Livros"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Emprestismo.DataLimite" class="control-label"></label>
@@ -30,7 +30,7 @@
                 <span asp-validation-for="Emprestismo.DataLimite" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Criar" class="btn btn-primary" />
             </div>
         </form>
     </div>

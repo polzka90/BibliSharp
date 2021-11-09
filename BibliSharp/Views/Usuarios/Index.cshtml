@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NomeUsuario)
+                Login
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Nome)
@@ -25,16 +25,16 @@
                 @Html.DisplayNameFor(model => model.Ativo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DataCreacao)
+                Data Criação
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CriadoPor)
+                Criado Por
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DataAlteracao)
+                Data Alteração
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AlteradoPor)
+                Alterado Por
             </th>
             <th></th>
         </tr>
@@ -67,9 +67,15 @@
                 @Html.DisplayFor(modelItem => item.AlteradoPor)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> 
-                @*<a asp-action="Delete" asp-route-id="@item.Id">Apagar</a>*@
+                @if (item.Ativo)
+                {
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a><label> | </label>
+                }
+            <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
+            @if (item.Ativo)
+            {
+                <label> | </label><a asp-action="Delete" asp-route-id="@item.Id"> Apagar </a>
+            }
             </td>
         </tr>
 }

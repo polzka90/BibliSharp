@@ -36,24 +36,34 @@ namespace BibliSharp.Controllers
                 return NotFound();
             }
 
+
             var emprestismo = await _context.Emprestismos
-                .FirstOrDefaultAsync(m => m.AlunoId == id);
+                .FirstOrDefaultAsync(m => m.EmprestismoId == id);
             if (emprestismo == null)
             {
                 return NotFound();
             }
+            DetailsEmprestismoViewModel model = new DetailsEmprestismoViewModel();
+            model.Emprestismo = emprestismo;
+            Aluno aluno = (await _context.Alunos.FirstOrDefaultAsync(a => a.Id == emprestismo.AlunoId));
+            model.Aluno = aluno.Nome + " " + aluno.Sobrenome + " " + aluno.Periodo + " " + aluno.Sala;
 
-            return View(emprestismo);
+            Livro livro = (await _context.Livros.FirstOrDefaultAsync(a => a.Id == emprestismo.LivroId));
+            model.Livro = livro.Nome + " " + livro.Autora + " " + livro.Ano;
+
+            return View(model);
         }
 
         // GET: Emprestismos/Create
         public async Task<IActionResult> Create()
         {
-            List<Aluno> alunos = await _context.Alunos.ToListAsync();
+            List<Aluno> alunos = await _context.Alunos.Where(a => a.Ativo).ToListAsync();
             List<Livro> livros = await _context.Livros.ToListAsync();
             var model = new CreateEmprestismoViewModel();
-            model.Alunos = alunos.Select(x => new SelectListItem() { Value = x.Id.ToString(), Text = x.Nome + " " + x.Sobrenome + " " + x.Periodo }).ToList();
+            model.Alunos = alunos.Select(x => new SelectListItem() { Value = x.Id.ToString(), Text = x.Nome + " " + x.Sobrenome + " " + x.Periodo + " " + x.Sala }).ToList();
             model.Livros = livros.Select(x => new SelectListItem() { Value = x.Id.ToString(), Text = x.Nome + " " + x.Autora + " " + x.Ano }).ToList();
+            model.Emprestismo = new Emprestismo();
+            model.Emprestismo.DataLimite = DateTime.Now.AddDays(3);
             return View(model);
         }
 
@@ -62,7 +72,7 @@ namespace BibliSharp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AlunoId,LivroId,DataRetirada,CriadoPor,DataLimite,DataEntrega,AlteradoPor")] Emprestismo emprestismo)
+        public async Task<IActionResult> Create([Bind("EmprestismoId,AlunoId,LivroId,DataRetirada,CriadoPor,DataLimite,DataEntrega,AlteradoPor")] Emprestismo emprestismo)
         {
             if (ModelState.IsValid)
             {
@@ -86,12 +96,24 @@ namespace BibliSharp.Controllers
                 return NotFound();
             }
 
-            var emprestismo = await _context.Emprestismos.FindAsync(id);
+            var emprestismo = await _context.Emprestismos.FirstOrDefaultAsync(i => i.EmprestismoId == id);
             if (emprestismo == null)
             {
                 return NotFound();
             }
-            return View(emprestismo);
+            emprestismo.DataEntrega = DateTime.Now;
+
+            EditEmprestismoViewModel model = new EditEmprestismoViewModel();
+            model.Emprestismo = emprestismo;
+            Aluno aluno = (await _context.Alunos.FirstOrDefaultAsync(a => a.Id == emprestismo.AlunoId));
+            model.Aluno = aluno.Nome + " " + aluno.Sobrenome + " " + aluno.Periodo + " " + aluno.Sala;
+
+            Livro livro = (await _context.Livros.FirstOrDefaultAsync(a => a.Id == emprestismo.LivroId));
+            model.Livro = livro.Nome + " " + livro.Autora + " " + livro.Ano;
+
+
+
+            return View(model);
         }
 
         // POST: Emprestismos/Edit/5
@@ -99,23 +121,22 @@ namespace BibliSharp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AlunoId,LivroId,DataRetirada,CriadoPor,DataLimite,DataEntrega,AlteradoPor")] Emprestismo emprestismo)
+        public async Task<IActionResult> Edit(int id, [Bind("EmprestismoId,AlunoId,LivroId,DataRetirada,CriadoPor,DataLimite,DataEntrega,AlteradoPor")] Emprestismo emprestismo)
         {
-            if (id != emprestismo.AlunoId)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
                     var user = HttpContext.User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.Name);
 
-                    emprestismo.DataEntrega = DateTime.Now;
                     emprestismo.AlteradoPor = user.Value;
 
-                    _context.Update(emprestismo);
+                    var emprestismoDb = _context.Emprestismos.Single(a => a.EmprestismoId == emprestismo.EmprestismoId);
+
+                    emprestismoDb.DataEntrega = emprestismo.DataEntrega;
+                    emprestismoDb.AlteradoPor = user.Value;
+
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -163,6 +184,11 @@ namespace BibliSharp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // GET: Emprestismos/VerSemDevolucao
+        public async Task<IActionResult> VerSemDevolucao()
+        {
+            return View(await _context.Emprestismos.Where(e => e.DataEntrega == DateTime.MinValue).ToListAsync());
+        }
         private bool EmprestismoExists(int id)
         {
             return _context.Emprestismos.Any(e => e.AlunoId == id);

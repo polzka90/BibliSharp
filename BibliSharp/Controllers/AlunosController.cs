@@ -65,7 +65,7 @@ namespace BibliSharp.Controllers
                 aluno.DataCreacao = DateTime.Now;
                 aluno.AlteradoPor = user.Value;
                 aluno.DataAlteracao = DateTime.Now;
-
+                aluno.Ativo = true;
                 _context.Add(aluno);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -94,7 +94,7 @@ namespace BibliSharp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Sobrenome,Sala,Periodo,Ativo,DataCreacao,CriadoPor,DataAlteracao,AlteradoPor")] Aluno aluno)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Sobrenome,Sala,Periodo,Ativo,DataAlteracao,AlteradoPor")] Aluno aluno)
         {
             if (id != aluno.Id)
             {
@@ -109,7 +109,16 @@ namespace BibliSharp.Controllers
 
                     aluno.AlteradoPor = user.Value;
                     aluno.DataAlteracao = DateTime.Now;
-                    _context.Update(aluno);
+
+                    var alunoDb = _context.Alunos.Single(a => a.Id == aluno.Id);
+
+                    // Update the properties
+                    _context.Entry(alunoDb).CurrentValues.SetValues(aluno);
+
+                    //_context.Alunos.Attach(aluno);
+                    _context.Entry(alunoDb).Property(x => x.CriadoPor).IsModified = false;
+                    _context.Entry(alunoDb).Property(x => x.DataCreacao).IsModified = false;
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

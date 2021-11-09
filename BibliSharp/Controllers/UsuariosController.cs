@@ -115,11 +115,16 @@ namespace BibliSharp.Controllers
                     //    var usuariodb = await _context.Usuarios.FindAsync(id);
                     //    usuario.Senha = usuariodb.Senha;
                     //}
-                    _context.Usuarios.Attach(usuario);
+                    // Update the properties
+                    var usuarioDb = _context.Usuarios.Single(a => a.Id == usuario.Id);
+                    _context.Entry(usuarioDb).CurrentValues.SetValues(usuario);
 
-                    
-                    _context.Entry(usuario).Property(x => x.Senha).IsModified = !(string.IsNullOrWhiteSpace(usuario.Senha));
-   
+                    _context.Entry(usuarioDb).Property(x => x.Senha).IsModified = !(string.IsNullOrWhiteSpace(usuario.Senha));
+                    _context.Entry(usuarioDb).Property(x => x.CriadoPor).IsModified = false;
+                    _context.Entry(usuarioDb).Property(x => x.DataCreacao).IsModified = false;
+                    _context.Entry(usuarioDb).Property(x => x.Ativo).IsModified = false;
+
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -162,7 +167,8 @@ namespace BibliSharp.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var usuario = await _context.Usuarios.FindAsync(id);
-            _context.Usuarios.Remove(usuario);
+            usuario.Ativo = false;
+            _context.Update(usuario);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

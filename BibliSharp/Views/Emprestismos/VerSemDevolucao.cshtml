@@ -1,0 +1,76 @@
+﻿@model IEnumerable<BibliSharp.DbModels.Emprestismo>
+
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<h1>Inicio</h1>
+
+<p>
+    <a asp-action="Create">Criar Novo</a>
+    <label> | </label>
+    <a asp-action="VerSemDevolucao"> Ver Livros que Faltam</a>
+    <label> | </label>
+    <a asp-action="Index"> Ver Todos</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Data Retirada
+            </th>
+            <th>
+                Criado Por
+            </th>
+            <th>
+                Data Limite
+            </th>
+            <th>
+                Data Entrega
+            </th>
+            <th>
+                Alterado Por
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmprestismoId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataRetirada)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CriadoPor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataLimite)
+                </td>
+                <td>
+                    @if (item.DataEntrega != DateTime.MinValue)
+                        @Html.DisplayFor(modelItem => item.DataEntrega)
+                </td>
+                <td>
+                    @if (item.DataEntrega != DateTime.MinValue)
+                        @Html.DisplayFor(modelItem => item.AlteradoPor)
+                </td>
+                <td>
+                    @if (item.DataEntrega == DateTime.MinValue)
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.EmprestismoId })
+                        <label> | </label>
+                        @Html.ActionLink("Details", "Details", new { id = item.EmprestismoId })
+                    }
+                    @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
