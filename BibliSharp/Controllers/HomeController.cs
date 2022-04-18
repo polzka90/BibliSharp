@@ -69,7 +69,7 @@ namespace BibliSharp.Controllers
             string nomeUsuario= string.Empty, role = string.Empty, id = string.Empty;
             if (ModelState.IsValid) //verifica se é válido
             {
-                if (u.NomeUsuario == "Admin" && u.Senha == "123456")
+                if (u.NomeUsuario.ToLower() == "admin" && u.Senha == "123456")
                 {
                     nomeUsuario = u.NomeUsuario;
                     role = "Admin";
