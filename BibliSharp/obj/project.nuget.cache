@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "SJ3WadUUY3Pz5QDMANpBTEFp+PG2iaRZ3mGhVogcPnhXTmNG9VrSHntoGV5F7jX06cfrk+MD85IFA4gIMCwEww==",
+  "dgSpecHash": "s3wkUdZRBb0wSY9wABITCcqOS8X9wMJkF4d2jk5Fwu0XB8ikvD7wi9mfet6/tuvCgmZLHK69ge9URdQKN4QczA==",
   "success": true,
   "projectFilePath": "C:\\PrivateWorkSpace\\BibliSharp\\BibliSharp\\BibliSharp.csproj",
   "expectedPackageFiles": [
@@ -177,7 +177,7 @@
     "C:\\Users\\laum9\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\laum9\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\laum9\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
-    "C:\\Users\\laum9\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.16\\microsoft.netcore.app.host.win-x64.5.0.16.nupkg.sha512"
+    "C:\\Users\\laum9\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.17\\microsoft.netcore.app.host.win-x64.5.0.17.nupkg.sha512"
   ],
   "logs": [
     {
